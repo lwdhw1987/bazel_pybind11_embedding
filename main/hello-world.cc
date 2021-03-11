@@ -17,15 +17,15 @@ int main(int argc, char** argv) {
   int py_argc = 9;
   py::scoped_interpreter guard{};
   wchar_t* wargv[py_argc];
-  std::string py_argv[py_argc] = {"convert.py",
-                                  "--input",
-                                  "resnet_v1_50_inference.pb",
-                                  "--inputs",
-                                  "input:0",
-                                  "--outputs",
-                                  "resnet_v1_50/predictions/Reshape_1:0",
-                                  "--output",
-                                  "resnet50.onnx"};
+  std::vector<std::string> py_argv{"convert.py",
+                                   "--input",
+                                   "resnet_v1_50_inference.pb",
+                                   "--inputs",
+                                   "input:0",
+                                   "--outputs",
+                                   "resnet_v1_50/predictions/Reshape_1:0",
+                                   "--output",
+                                   "resnet50.onnx"};
   for (int i = 0; i < py_argc; i++) {
     wargv[i] = Py_DecodeLocale(py_argv[i].c_str(), nullptr);
     if (wargv[i] == nullptr) {
